@@ -490,5 +490,120 @@ puts({ b: 123 }.inspect)</p>
         </ul>
       <% end %>
     <% end %>
+
+    <% slide do %>
+      <p>
+        Introducing....
+      </p>
+
+      <h1 class="prez-element biggest">prez</h1>
+    <% end %>
+
+    <% slide do %>
+      <p class="pre left-aligned">$ prez new parsing_ruby
+<span class="prez-element">$ prez start parsing_ruby</span>
+<span class="prez-element">$ prez start --server parsing_ruby.prez</span>
+<span class="prez-element">$ prez build parsing_ruby</span>
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li><strong>new</strong> creates a new prez file</li>
+          <li><strong>start</strong> launches a browser with the presentation</li>
+          <li>The <strong>--server</strong> option supports dynamic reloading of prez</li>
+          <li><strong>build</strong> generates a <strong>single html</strong> file</li>
+          <li><strong>All</strong> content is embedded in the one file... including <strong>css</strong>, <strong>js</strong>, and <strong>images</strong></li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p class="smaller pre left-aligned"><% html_escape do %><html>
+  <head>
+    <%%= stylesheet "prez" %>
+  </head>
+
+  <body>
+    <%% slide do %>
+      ...
+      <%%= image "myImage" %>
+
+      <%% notes do %>
+        ...
+      <%% end %>
+    <%% end %>
+  </body>
+</html><% end %>
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>Regular ERB file</li>
+          <li>Default stylesheet can be swapped out</li>
+          <li>Helpers for normalization</li>
+          <li>Notes section tied to slide</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <%= image "prez", width: "70%", style: "border: 1px solid black;" %>
+
+      <% notes do %>
+        <ul>
+          <li>Buttons / hotkeys control other window</li>
+          <li>Slide dropdown</li>
+          <li>Timers... flashing</li>
+          <li>Grayed out content</li>
+          <li>Slide notes</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <h2>Why?</h2>
+
+      <% notes do %>
+        <ul>
+          <li>PowerPoint... KeyNote... Google Slides... countless other</li>
+          <li>.... why?</li>
+          <li>Lightning talk story</li>
+          <li>Want something more portable/functional</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <h2>but seriously... <span class="prez-element">why?</span></h2>
+
+      <% notes do %>
+        <ul>
+          <li>Because I wanted to</li>
+          <li>More specifically, because it's fun</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <h1>Play</h1>
+
+      <% notes do %>
+        <ul>
+          <li>Have fun with your code</li>
+          <li>Go play with the parser gem</li>
+          <li>Start your own gem</li>
+          <li>Learn a new language</li>
+          <li>Play</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <%= image "tired", height: "80%" %>
+
+      <% notes do %>
+        And now... time to get some sleep....
+      <% end %>
+    <% end %>
   </body>
 </html>
