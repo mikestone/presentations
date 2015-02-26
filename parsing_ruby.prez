@@ -1,0 +1,491 @@
+<html>
+  <head>
+    <% duration "40:00" %>
+    <%= stylesheet "prez" %>
+    <%= stylesheet "style" %>
+  </head>
+
+  <body>
+    <% slide do %>
+      <h1>parsing { ruby }</h1>
+
+      <p>
+        By MVS (Mike Virata-Stone)
+      </p>
+
+      <% element do %>
+        @smellsblue on the Twitters
+      <% end %>
+
+      <% element do %>
+        and @TableTopTally
+      <% end %>
+
+      <% element do %>
+        @ReasonNumber
+      <% end %>
+
+      <% element do %>
+        oh yeah, and @MundaneRPG
+      <% end %>
+
+      <% element do %>
+        a bit defunct, but also @CharacterTome
+      <% end %>
+
+      <% notes do %>
+        <ul>
+          <li>Since <strong>everyone</strong> else is listing their <strong>twitter handles</strong></li>
+          <li>Maybe I have <strong>too many?</strong></li>
+          <li>Just to <strong>warn you</strong>, I may rely on <strong>reading my notes</strong>...</li>
+          <li>I'm not as good a speaker as <strong>y'all</strong>, so let me have my <strong>crutches</strong></li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        What is a parser?
+      </p>
+
+      <% element tag: :p do %>
+        Let's you read in some content so you can manipulate it and do
+        something with it.
+      <% end %>
+
+      <% element tag: :p do %>
+        In our case, we are reading in Ruby code.
+      <% end %>
+    <% end %>
+
+    <% slide align: :left do %>
+      <p>
+        Available parsers
+      </p>
+
+      <ul>
+        <li class="prez-element">Ripper from Ruby standard library</li>
+        <li class="prez-element">ruby_parser gem</li>
+        <li class="prez-element">ParseTree gem</li>
+        <li class="prez-element">parser gem</li>
+        <li class="prez-element">... maybe more...?</li>
+      </ul>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        Which to use?
+      </p>
+
+      <% element tag: :p do %>
+        The parser gem.
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        Why?
+      </p>
+
+      <ul class="left-aligned">
+        <li class="prez-element">I googled for a parser and it came up</li>
+        <li class="prez-element">It can easily manipulate code</li>
+        <li class="prez-element">Lazy</li>
+      </ul>
+
+      <% notes do %>
+        <strong>Lazy</strong>, so I didn't search past the <strong>first</strong> one that seemed like
+        it would do <strong>what I wanted</strong> to do.
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        Let's try it out!
+      </p>
+
+      <p class="pre left-aligned">
+<span class="prez-element">$ gem install parser</span>
+<span class="prez-element">irb</span>
+<span class="prez-element"><% html_escape do %>> require "parser/current"<% end %></span>
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li><strong>Install</strong> the gem</li>
+          <li>Let's play around in <strong>IRB</strong></li>
+          <li>Require <strong>parser/current</strong>, which gives us access to parse Ruby from the <strong>currently running</strong> version of Ruby</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p class="pre left-aligned"><% html_escape do %>> Parser::CurrentRuby.parse('puts "Hello world!"')<% end %>
+<span class="prez-element"><% html_escape do %> => (send nil :puts
+  (str "Hello world!"))<% end %></span>
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>Send indicates we are <strong>executing a method</strong></li>
+          <li>nil means there is <strong>no explicit receiver</strong></li>
+          <li>puts is the <strong>method</strong> being invoked</li>
+          <li>Then we see the <strong>string</strong> being passed in</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        But what <em>was</em> that??
+      </p>
+
+      <p class="pre left-aligned">
+<span class="prez-element">(send nil :puts
+  (str "Hello world!"))</span>
+      </p>
+
+      <% element tag: :p do %>
+        S-Expressions
+      <% end %>
+
+      <ul class="left-aligned">
+        <li class="prez-element"><strong>atoms</strong>, like <em>send</em>, <em>nil</em> and <em>:puts</em></li>
+        <li class="prez-element"><strong>expressions</strong>, like <em>(str "Hello world!")</em></li>
+      </ul>
+
+      <% notes do %>
+        <ul>
+          <li>What WAS that??</li>
+          <li>It's called an <strong>s-expression</strong></li>
+          <li>I'm a parser <strong>n00b</strong>... but I think the simple tree structure is <strong>elegant</strong> easy to use representation of the code, perhaps <strong>common</strong> to a lot of parsers</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <%= image "aurora", width: "70%" %>
+    <% end %>
+
+    <% slide do %>
+      <p class="smaller pre left-aligned"><% html_escape do %>> Parser::CurrentRuby.parse(%{
+def say_hi(name)
+  puts "hi \#{name}!"
+end
+})<% end %>
+<span class="prez-element"><% html_escape do %> => (def :say_hi
+  (args
+    (arg :name))
+  (send nil :puts
+    (dstr
+      (str "hi ")
+      (begin
+        (lvar :name))
+      (str "!"))))<% end %></span>
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>Let's parse something more <strong>complex</strong>.</li>
+          <li><strong>def say_hi</strong> part is <strong>self explanatory</strong></li>
+          <li>The <strong>args</strong> indicates the <strong>arguments for the new method</strong> (we see the <strong>'name'</strong> arg)</li>
+          <li>Notice <strong>dstr</strong>... perhaps for "dynamic string"?</li>
+          <li>Then <strong>lvar</strong>, perhaps for local variable? references the name argument</li>
+          <li>Note that this is <strong>evidence</strong> that a dynamic double quote string is not really <strong>bad performance</strong>... it is processed at <strong>parse time</strong></li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p class="smaller pre left-aligned"><% html_escape do %>> Parser::CurrentRuby.parse("
+[1, 2, 3].each { |x| puts x }
+")<% end %>
+<span class="prez-element"><% html_escape do %> => (block
+  (send
+    (array
+      (int 1)
+      (int 2)
+      (int 3)) :each)
+  (args
+    (arg :x))
+  (send nil :puts
+    (lvar :x)))<% end %></span>
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>What about invoking a method <strong>with a block</strong>?</li>
+          <li>Whaaaaa?</li>
+          <li>The send gets <strong>PASSED INTO</strong> the <strong>block</strong>?</li>
+          <li>Note the <strong>literal array</strong> as the <strong>receiver</strong> of the each method being sent</li>
+          <li>Then we see the <strong>arguments</strong> for the block (x)</li>
+          <li>And then the <strong>puts method</strong> call from within the block</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        Are these just s-expressions, or can we do more?
+      </p>
+
+      <% element tag: :p do %>
+        <strong>I WANT MOAR!!!</strong>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <%= image "aurora-2", width: "70%" %>
+    <% end %>
+
+    <% slide do %>
+      <p class="pre left-aligned"><% html_escape do %>> parsed = Parser::CurrentRuby.parse("
+[1, 2, 3].each { |x| puts x }")
+> parsed.class<% end %>
+ <span class="prez-element"><%= html_escape "=>" %> Parser::AST::Node</span>
+      </p>
+
+      <% element tag: :p do %>
+        It's just a regular class, yay!
+      <% end %>
+
+      <% notes do %>
+        <ul>
+          <li>We have a <strong>regular Ruby object</strong>, that we must be able to do stuff with</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p class="smaller">
+        parsed: <strong>[1, 2, 3].each { |x| puts x }</strong>
+      </p>
+
+      <p>
+        Traverse the s-expression
+      </p>
+
+      <p class="pre left-aligned"><%= html_escape ">" %> parsed.<span class="emphasize">children</span>
+ <%= html_escape "=>" %> [<span class="red-background">(send
+  (array
+    (int 1)
+    (int 2)
+    (int 3)) :each)</span>, <span class="green-background">(args
+  (arg :x))</span>, <span class="blue-background">(send nil :puts
+  (lvar :x))</span>]
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>We can view the <strong>children</strong> of a given <strong>s-expression</strong></li>
+          <li><strong>Recall</strong> the block expression <strong>wraps</strong> the send</li>
+          <li>First is the <strong>message</strong> the block is being <strong>sent to</strong></li>
+          <li>Then the <strong>arguments</strong> for the block</li>
+          <li>And finally the <strong>block contents</strong></li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p class="smaller">
+        parsed: <strong>[1, 2, 3].each { |x| puts x }</strong>
+      </p>
+
+      <p>
+        Access the original source code
+      </p>
+
+      <p class="pre left-aligned"><%= html_escape ">" %> parsed.loc.expression.<span class="emphasize">source_buffer.source</span>
+ <%= html_escape "=>" %> "[1, 2, 3].each { |x| puts x }"
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>If we don't have access to the <strong>source contents</strong>, we can get to it</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p class="smaller">
+        parsed: <strong>[1, 2, 3].each { |x| puts x }</strong>
+      </p>
+
+      <p>
+        Access the code in the source for a given expression
+      </p>
+
+      <p class="pre left-aligned"><%= html_escape ">" %> parsed.children[2]
+ <%= html_escape "=>" %> (send nil :puts
+  (lvar :x))
+<span class="prez-element"><%= html_escape ">" %> i = parsed.children[2].loc.expression.<span class="emphasize">begin_pos</span>
+<%= html_escape ">" %> j = parsed.children[2].loc.expression.<span class="emphasize">end_pos</span>
+<%= html_escape ">" %> parsed.loc.expression.source_buffer.source[i...j]
+ <%= html_escape "=>" %> "puts x"</span>
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>If we grab one of the <strong>children</strong>.... the <strong>contents</strong> of the <strong>block</strong> in this case...</li>
+          <li>We can retrieve where in the <strong>original source</strong> it was located</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p class="smaller">
+        parsed: <strong>[1, 2, 3].each { |x| puts x }</strong>
+      </p>
+
+      <p>
+        Alternatively for just the source...
+      </p>
+
+      <p class="pre left-aligned"><%= html_escape ">" %> parsed.children[2].loc.expression.<span class="emphasize">source</span>
+ <%= html_escape "=>" %> "puts x"
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>.... or we could just <strong>directly</strong> grab the node's <strong>original</strong> source content</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        What else?
+      </p>
+
+      <% element tag: :p do %>
+        Rewriting!
+      <% end %>
+
+      <% element tag: :p do %>
+        <% html_escape do %>{} => Hash.new<% end %>
+      <% end %>
+
+      <% notes do %>
+        <ul>
+          <li>So far, nothing but <strong>inspecting structure</strong> of the code</li>
+          <li>Great for things like <strong>detecting</strong> certain patterns/antipatterns</li>
+          <li>What if we want to change all <strong>empty hash literals</strong></li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p class="pre left-aligned"><% html_escape do %>> Parser::CurrentRuby.parse "{}"
+ => (hash)<% end %>
+      </p>
+
+      <p class="pre left-aligned prez-element"><% html_escape do %>> Parser::CurrentRuby.parse "{ a: 123 }"
+ => (hash
+  (pair
+    (sym :a)
+    (int 123)))<% end %>
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li><strong>What structure</strong> are we looking for?  To IRB!</li>
+          <li>What about a hash that <strong>isn't empty</strong>?</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p class="pre left-aligned"><% html_escape do %>class RewriteHash < Parser::Rewriter
+  def on_hash(node)
+    return super unless node.type == :hash
+    return super unless node.children.empty?
+    replace node.loc.expression, "Hash.new"
+    super
+  end
+end<% end %>
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>Write a <strong>class</strong> in a file that extends <strong>Parser::Rewriter</strong></li>
+          <li><strong>on_hash</strong> is called when a <strong>hash</strong> is defined</li>
+          <li>Extra precaution to ensure we have the right node (<strong>probably not be needed</strong> in this case)</li>
+          <li>Look only for <strong>empty hash</strong> nodes</li>
+          <li><strong>replace</strong> method from the <strong>base class</strong></li>
+          <li>Replaces <strong>given expression</strong> with what we provide, <strong>Hash.new</strong></li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p class="smaller">
+        example.rb file before
+      </p>
+
+      <p class="smaller pre left-aligned">puts({}.inspect)
+a = {}
+puts a
+puts({ b: 123 }.inspect)</p>
+
+      <% element do %>
+        <hr />
+
+        <p class="smaller pre left-aligned">$ ruby-rewrite --load rewrite_hash.rb -m example.rb</p>
+      <% end %>
+
+      <% element do %>
+        <hr />
+
+        <p class="smaller">
+          example.rb file after
+        </p>
+
+        <p class="smaller pre left-aligned">puts(Hash.new.inspect)
+a = Hash.new
+puts a
+puts({ b: 123 }.inspect)</p>
+      <% end %>
+
+      <% notes do %>
+        <ul>
+          <li>Let's try it out with a <strong>simple test</strong> that has a couple <strong>empty hashes</strong>, and a <strong>non-empty</strong> one</li>
+          <li>Run <strong>ruby-rewrite</strong> program from <strong>parser gem</strong>, passing our <strong>new class</strong>, and the <strong>file</strong> we want to convert, and <strong>-m</strong> to indicate we are making modifications</li>
+          <li><strong>After running</strong>, we see the changes we were <strong>expecting</strong></li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        Some possibilities for parsing and rewriting
+      </p>
+
+      <ul class="left-aligned">
+        <li class="prez-element">Search for common code that needs refactoring</li>
+        <li class="prez-element">Auto refactor some code</li>
+        <li class="prez-element">Detect custom anti patterns in a build</li>
+        <li class="prez-element">Write a custom Ruby transpiler</li>
+      </ul>
+
+      <% notes do %>
+        These are just the beginning.
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <%= image "aurora-3", width: "70%" %>
+    <% end %>
+
+    <% slide do %>
+      <h1 class="prez-element biggest">#secret</h1>
+
+      <% notes do %>
+        <ul>
+          <li>I learned a trick from <strong>@tenderlove</strong></li>
+          <li>If you use <strong>hashtag-secret</strong>, nobody will know the secret is <strong>from you</strong></li>
+          <li>My secret... I spent <strong>more time</strong> writing presentation software than this <strong>presentation</strong></li>
+        </ul>
+      <% end %>
+    <% end %>
+  </body>
+</html>

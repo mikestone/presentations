@@ -1,0 +1,6 @@
+*.html
+.prez-cache/
+.sass-cache/
+
+# Ignore by default, force add if they are ok to add.
+images/

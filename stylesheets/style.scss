@@ -1,0 +1,42 @@
+.pre {
+    font-family: monospace;
+    font-size: 0.9em;
+    white-space: pre;
+}
+
+.biggest {
+    font-size: 5.0em;
+}
+
+.smaller.pre {
+    font-size: 0.7em;
+}
+
+.center-aligned {
+    text-align: center;
+}
+
+.left-aligned {
+    padding-left: 5%;
+    text-align: left;
+}
+
+.right-aligned {
+    text-align: right;
+}
+
+.red-background {
+    background-color: #ffcccc;
+}
+
+.green-background {
+    background-color: #ccffcc;
+}
+
+.blue-background {
+    background-color: #ccccff;
+}
+
+.emphasize {
+    font-weight: bold;
+}
