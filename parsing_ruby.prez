@@ -13,25 +13,26 @@
         By MVS (Mike Virata-Stone)
       </p>
 
-      <% element do %>
+      <p class="prez-element smaller">
         @smellsblue on the Twitters
-      <% end %>
+      </p>
 
-      <% element do %>
+      <p class="prez-element smaller">
         and @TableTopTally
-      <% end %>
+      </p>
 
-      <% element do %>
+      <p class="prez-element smaller">
         @ReasonNumber
-      <% end %>
+      </p>
 
-      <% element do %>
+      <p class="prez-element smaller">
         oh yeah, and @MundaneRPG
-      <% end %>
+      </p>
 
-      <% element do %>
+      <p class="prez-element smaller">
         a bit defunct, but also @CharacterTome
-      <% end %>
+        <%= image "twitter", height: "50%", style: "position: absolute; right: 0; top: 50%;" %>
+      </p>
 
       <% notes do %>
         <ul>
@@ -231,6 +232,8 @@ end
 
       <% element tag: :p do %>
         <strong>I WANT MOAR!!!</strong>
+        <br />
+        <%= image "moar", width: "50%" %>
       <% end %>
     <% end %>
 
