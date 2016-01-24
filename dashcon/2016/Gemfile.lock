@@ -1,0 +1,38 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.4.0)
+    coffee-script (2.4.1)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.10.0)
+    execjs (2.6.0)
+    json (1.8.3)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    libv8 (3.16.14.13)
+    prez (0.0.6)
+      coffee-script (~> 2.3)
+      launchy (~> 2.4)
+      sass (~> 3.4)
+      therubyracer (~> 0.12)
+      thor (~> 0.19)
+      uglifier (~> 2.7)
+    ref (2.0.0)
+    sass (3.4.21)
+    therubyracer (0.12.2)
+      libv8 (~> 3.16.14.0)
+      ref
+    thor (0.19.1)
+    uglifier (2.7.2)
+      execjs (>= 0.3.0)
+      json (>= 1.8.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  prez
+
+BUNDLED WITH
+   1.11.2
