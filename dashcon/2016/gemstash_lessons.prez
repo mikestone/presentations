@@ -1,10 +1,23 @@
 <html>
   <head>
+    <% duration "45:00" %>
     <%= stylesheet "prez" %>
   </head>
 
   <body>
     <% slide do %>
+      <h1>Gemstash</h1>
+
+      <p>
+        By MVS (Mike Virata-Stone)
+      </p>
+
+      <p class="smaller">
+        @smellsblue on Twitter and GitHub
+      </p>
+    <% end %>
+
+    <% slide align: :left do %>
       <p>
         What exactly <em>is</em> Gemstash?
       </p>
@@ -64,64 +77,28 @@
       <% end %>
     <% end %>
 
-    <% slide do %>
+    <% slide align: :left do %>
       <p>
-        Bundling Rails 4.2.5 against Gemstash where all gems have been cached
+        Bundling Rails 4.2.5 against https://rubygems.org
       </p>
 
-      <% notes do %>
-      <% end %>
-    <% end %>
-
-    <% slide do %>
-      <p>
-        <pre>
+      <% element class: "pre smaller" do %>
 $ time bundle
-Fetching gem metadata from http://localhost:9292/...........
-Fetching version metadata from http://localhost:9292/...
-Fetching dependency metadata from http://localhost:9292/..
+Fetching gem metadata from https://rubygems.org/...........
+Fetching version metadata from https://rubygems.org/...
+Fetching dependency metadata from https://rubygems.org/..
 Installing rake 10.5.0
 Installing i18n 0.7.0
-Using json 1.8.3
-Installing minitest 5.8.4
-Installing thread_safe 0.3.5
-Installing builder 3.2.2
-Installing erubis 2.7.0
-Installing mini_portile2 2.0.0
-Installing rack 1.6.4
-Installing mime-types 2.99
-Installing arel 6.0.3
-Installing concurrent-ruby 1.0.0
-Using bundler 1.11.2
-Installing thor 0.19.1
-Installing tzinfo 1.2.2
-Installing nokogiri 1.6.7.2 with native extensions
-Installing rack-test 0.6.3
-Installing mail 2.6.3
-Installing sprockets 3.5.2
-Installing activesupport 4.2.5
-Installing loofah 2.0.3
-Installing rails-deprecated_sanitizer 1.0.3
-Installing globalid 0.3.6
-Installing activemodel 4.2.5
-Installing rails-html-sanitizer 1.0.2
-Installing rails-dom-testing 1.0.7
-Installing activejob 4.2.5
-Installing activerecord 4.2.5
-Installing actionview 4.2.5
-Installing actionpack 4.2.5
-Installing actionmailer 4.2.5
-Installing railties 4.2.5
+...
 Installing sprockets-rails 3.0.0
 Installing rails 4.2.5
 Bundle complete! 1 Gemfile dependency, 34 gems now installed.
 Use `bundle show [gemname]` to see where a bundled gem is installed.
 
-real	0m54.471s
-user	0m31.413s
-sys	0m22.742s
-        </pre>
-      </p>
+real	1m41.089s
+user	0m32.986s
+sys	0m23.096s
+      <% end %>
 
       <% notes do %>
         <p>
@@ -131,63 +108,34 @@ sys	0m22.742s
     <% end %>
 
     <% slide do %>
-      <p>
-        <pre>real	0m54.471s</pre>
-      </p>
+      <p class="pre">real	1m41.089s</p>
 
       <% notes do %>
       <% end %>
     <% end %>
 
-    <% slide do %>
+    <% slide align: :left do %>
       <p>
-        <pre>
+        And now against Gemstash where all gems have been cached
+      </p>
+
+      <% element class: "pre smaller" do %>
 $ time bundle
-Fetching gem metadata from https://rubygems.org/...........
-Fetching version metadata from https://rubygems.org/...
-Fetching dependency metadata from https://rubygems.org/..
+Fetching gem metadata from http://localhost:9292/...........
+Fetching version metadata from http://localhost:9292/...
+Fetching dependency metadata from http://localhost:9292/..
 Installing rake 10.5.0
 Installing i18n 0.7.0
-Using json 1.8.3
-Installing minitest 5.8.4
-Installing thread_safe 0.3.5
-Installing builder 3.2.2
-Installing erubis 2.7.0
-Installing mini_portile2 2.0.0
-Installing rack 1.6.4
-Installing mime-types 2.99
-Installing arel 6.0.3
-Installing concurrent-ruby 1.0.0
-Using bundler 1.11.2
-Installing thor 0.19.1
-Installing tzinfo 1.2.2
-Installing nokogiri 1.6.7.2 with native extensions
-Installing rack-test 0.6.3
-Installing mail 2.6.3
-Installing sprockets 3.5.2
-Installing activesupport 4.2.5
-Installing loofah 2.0.3
-Installing rails-deprecated_sanitizer 1.0.3
-Installing globalid 0.3.6
-Installing activemodel 4.2.5
-Installing rails-html-sanitizer 1.0.2
-Installing rails-dom-testing 1.0.7
-Installing activejob 4.2.5
-Installing activerecord 4.2.5
-Installing actionview 4.2.5
-Installing actionpack 4.2.5
-Installing actionmailer 4.2.5
-Installing railties 4.2.5
+...
 Installing sprockets-rails 3.0.0
 Installing rails 4.2.5
 Bundle complete! 1 Gemfile dependency, 34 gems now installed.
 Use `bundle show [gemname]` to see where a bundled gem is installed.
 
-real	1m41.089s
-user	0m32.986s
-sys	0m23.096s
-        </pre>
-      </p>
+real	0m54.471s
+user	0m31.413s
+sys	0m22.742s
+      <% end %>
 
       <% notes do %>
         <p>
@@ -197,9 +145,7 @@ sys	0m23.096s
     <% end %>
 
     <% slide do %>
-      <p>
-        <pre>real	1m41.089s</pre>
-      </p>
+      <p class="pre">real	0m54.471s</p>
 
       <% notes do %>
       <% end %>
@@ -207,18 +153,20 @@ sys	0m23.096s
 
     <% slide do %>
       <p>
-        Nokogiri takes a long time, so I tried again with Nokogiri preinstalled. The result was:
+        Nokogiri takes a long time to build, so I tried again with Nokogiri preinstalled.
       </p>
 
-      <p>
-        Gemstash:
-        <pre>real	0m11.160s</pre>
-      </p>
+      <table style="border: none">
+        <% element tag: :tr do %>
+          <td>rubygems.org</td>
+          <td class="pre">real	0m32.879s</td>
+        <% end %>
 
-      <p>
-        rubygems.org:
-        <pre>real	0m32.879s</pre>
-      </p>
+        <% element tag: :tr do %>
+          <td>Gemstash</td>
+          <td class="pre">real	0m11.160s</td>
+        <% end %>
+      </table>
 
       <% notes do %>
       <% end %>
@@ -312,6 +260,132 @@ sys	0m23.096s
         <p>
           Maybe mention npm implementation
         </p>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        So how do you use Gemstash?
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide align: :left do %>
+      <p>
+        Set it up, and start it
+      </p>
+
+      <p class="pre">
+<% element tag: :span do %>$ gem install gemstash<% end %>
+<% element tag: :span do %>$ gemstash start<% end %>
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide align: :left do %>
+      <p>
+        Update your <strong>Gemfile</strong>:
+      </p>
+
+      <p class="pre">
+source "https://rubygems.org"
+
+gem "rails"
+
+source "https://other-gem-server.org" do
+  gem "other-gem"
+end
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide align: :left do %>
+      <p>
+        Update your <strong>Gemfile</strong>:
+      </p>
+
+      <p class="pre">
+<strong>require "cgi"</strong>
+source "https://rubygems.org"
+
+gem "rails"
+
+source "https://other-gem-server.org" do
+  gem "other-gem"
+end
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide align: :left do %>
+      <p>
+        Update your <strong>Gemfile</strong>:
+      </p>
+
+      <p class="pre">
+require "cgi"
+source <strike>"https://rubygems.org"</strike>
+
+gem "rails"
+
+source <strike>"https://other-gem-server.org"</strike> do
+  gem "other-gem"
+end
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide align: :left do %>
+      <p>
+        Update your <strong>Gemfile</strong>:
+      </p>
+
+      <p class="pre">
+require "cgi"
+source <strong>"http://localhost:9292"</strong>
+
+gem "rails"
+
+source <strong>"http://localhost:9292/upstream/" +
+    CGI.escape("https://other-gem-server.org")</strong> do
+  gem "other-gem"
+end
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide align: :left do %>
+      <p>
+        Even better, keep your <strong>Gemfile</strong> as is, and use <strong>Bundler 1.11.2</strong>:
+      </p>
+
+      <p class="pre smaller">
+<% element tag: :span do %>$ bundle config mirror.https://rubygems.org http://localhost:9292<% end %>
+<% element tag: :span do %>$ bundle config mirror.https://other-gem-server.com http://localhost:9292<% end %>
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        Questions?
+      </p>
+
+      <% notes do %>
       <% end %>
     <% end %>
   </body>
