@@ -6,7 +6,11 @@
 
   <body>
     <% slide do %>
-      <h2>Gemstash: A Tour + Lessons Learned</h2>
+      <p>
+        <%= image "gemstash" %>
+      </p>
+
+      <h2>A Tour + Lessons Learned</h2>
 
       <p>
         By MVS (Mike Virata-Stone)
@@ -15,6 +19,12 @@
       <p class="smaller">
         @smellsblue on Twitter and GitHub
       </p>
+
+      <% notes do %>
+        <ul>
+          <li>Special thanks to <strong>Jon</strong> for the awesome Gemstash logo!</li>
+        </ul>
+      <% end %>
     <% end %>
 
     <% slide do %>
