@@ -457,7 +457,7 @@ end
       <h3>Questions?</h3>
 
       <% notes do %>
-        <p>Before we go into <strong>Part 2</strong>, any questions?</p>
+        <p>Before we go into <strong>Part 3</strong>, any questions?</p>
       <% end %>
     <% end %>
 
@@ -625,6 +625,32 @@ end
     <% end %>
 
     <% slide do %>
+      <h3>Tools: RuboCop</h3>
+
+      <% element do %>
+        Configure via easy YAML file
+      <% end %>
+
+      <% element do %>
+        Enforces a common style
+      <% end %>
+
+      <% element do %>
+        Can look for potential bugs or anti-patterns
+      <% end %>
+
+      <% element do %>
+        Can alert to upcoming changes
+      <% end %>
+
+      <% notes do %>
+        <ul>
+          <li><strong>frozen_string_literal: true</strong> Ruby 2.3 comment / upcoming 3.0 change</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
       <h3>Tools: Travis</h3>
 
       <% element do %>
@@ -701,6 +727,14 @@ end
 
       <% notes do %>
       <% end %>
+    <% end %>
+
+    <% slide do %>
+      <h3>Questions?</h3>
+    <% end %>
+
+    <% slide do %>
+      <h3>Thank you!</h3>
     <% end %>
   </body>
 </html>
