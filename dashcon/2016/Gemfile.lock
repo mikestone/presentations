@@ -11,7 +11,7 @@ GEM
     launchy (2.4.3)
       addressable (~> 2.3)
     libv8 (3.16.14.13)
-    prez (0.0.6)
+    prez (0.1.0)
       coffee-script (~> 2.3)
       launchy (~> 2.4)
       sass (~> 3.4)
