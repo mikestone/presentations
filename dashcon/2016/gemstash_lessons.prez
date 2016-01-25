@@ -553,6 +553,10 @@ end
       <% end %>
 
       <% notes do %>
+        <ul>
+          <li>Cut time to less than a quarter original</li>
+          <li>Still slower than MRI, but much more bareable</li>
+        </ul>
       <% end %>
     <% end %>
 
@@ -615,6 +619,85 @@ end
 <% element tag: :span do %>status = org.jruby.Main.new(config).run(%w(arg1 arg2).to_java(:String)).status<% end %>
 <% element tag: :span do %>output = output_stream.to_string<% end %>
       </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <h3>Tools: Travis</h3>
+
+      <% element do %>
+        Configure via easy YAML file
+      <% end %>
+
+      <% element do %>
+        Build concurrently across multiple versions of ruby or environments
+      <% end %>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <h3>Tools: Travis</h3>
+
+      <div>
+        <%= image "travis", width: "75%" %>
+      </div>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <h3>Tools: Travis</h3>
+
+      <div>
+        Configure via easy YAML file
+      </div>
+
+      <div>
+        Build concurrently across multiple versions of ruby or environments
+      </div>
+
+      <div>
+        Integrate seamlessly with Slack
+      </div>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <h3>Tools: Travis</h3>
+
+      <div>
+        <%= image "slack-travis", width: "75%" %>
+      </div>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <h3>Tools: Travis</h3>
+
+      <div>
+        Configure via easy YAML file
+      </div>
+
+      <div>
+        Build concurrently across multiple versions of ruby or environments
+      </div>
+
+      <div>
+        Integrate seamlessly with Slack
+      </div>
+
+      <div>
+        Free for Open Source projects
+      </div>
 
       <% notes do %>
       <% end %>
