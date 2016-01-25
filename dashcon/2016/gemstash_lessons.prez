@@ -466,7 +466,155 @@ end
     <% end %>
 
     <% slide do %>
-      <h3>What's the biggest things I learned?</h3>
+      <h3>Testing!</h3>
+
+      <% element do %>
+        Tests from the beginning
+      <% end %>
+
+      <% element do %>
+        Thorough suite in the end
+      <% end %>
+
+      <% element do %>
+        Confidence to refactor frequently
+      <% end %>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <h3>Integration tests</h3>
+
+      <% element do %>
+        Thorough end to end tests
+      <% end %>
+
+      <% element do %>
+        Demonstrates it works for the necessary use cases
+      <% end %>
+
+      <% element do %>
+        Slower to run
+      <% end %>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <h3>Java trubs</h3>
+
+      <% element do %>
+        Integration specs shell out to act as Bundler calling Gemstash:
+      <% end %>
+
+      <% element class: "pre" do %>
+it "can bundle with full index" do
+  expect(<strong>execute("bundle", %w(--full-index)</strong>, dir: dir)).to exit_success
+  expect(<strong>execute("bundle", %w(exec speaker hi)</strong>, dir: dir)).
+    to exit_success.and_output("Hello world, #{platform_message}\n")
+end
+      <% end %>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <h3>Spawning Java is <em>costly!!!</em></h3>
+
+      <% element do %>
+        Tests were taking almost <strong>20 sec</strong> on MRI
+      <% end %>
+
+      <% element do %>
+        On JRuby, the same tests were taking over <strong>4 min 30 sec</strong>!!
+      <% end %>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <h3>Solution</h3>
+
+      <% element do %>
+        Spawn a new JRuby instance within the same process!
+      <% end %>
+
+      <% element do %>
+        Tests went from over <strong>4 min 30 sec</strong>
+      <% end %>
+
+      <% element do %>
+        To barely over <strong>1 min</strong>
+      <% end %>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide align: :left do %>
+      <h3>The deets</h3>
+
+      <% element tag: :p, class: "pre", style: "font-size: 0.25em;" do %>
+# Run a JRuby program in process.
+class InProcessExec
+  attr_reader :status, :output
+
+  def initialize(env, dir, args)
+    raise "InProcessExec is only valid on JRuby!" unless RUBY_PLATFORM == "java"
+    @env = env
+    @dir = dir
+    @args = args
+    exec
+  end
+
+private
+
+  def exec
+    prepare_streams
+    prepare_config
+    @status = org.jruby.Main.new(@config).run(@args.to_java(:String)).status
+    @output = @output_stream.to_string
+  end
+
+  def prepare_streams
+    @input_stream = java.io.ByteArrayInputStream.new([].to_java(:byte))
+    @output_stream = java.io.ByteArrayOutputStream.new
+    @output_print_stream = java.io.PrintStream.new(@output_stream)
+  end
+
+  def prepare_config
+    @config = org.jruby.RubyInstanceConfig.new(JRuby.runtime.instance_config)
+    @config.environment = @env
+    @config.current_directory = @dir
+    @config.input = @input_stream
+    @config.output = @output_print_stream
+    @config.error = @output_print_stream
+  end
+end
+      <% end %>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide align: :left do %>
+      <h3>The important bits</h3>
+
+      <p class="pre smaller">
+<% element tag: :span do %>config = org.jruby.RubyInstanceConfig.new(JRuby.runtime.instance_config)<% end %>
+<% element tag: :span do %>config.environment = { "ENV_VAR" => "value" }<% end %>
+<% element tag: :span do %>config.current_directory = "path/to/dir"<% end %>
+<% element tag: :span do %>config.input = java.io.ByteArrayInputStream.new([].to_java(:byte))<% end %>
+<% element tag: :span do %>output_stream = config.output = java.io.ByteArrayOutputStream.new<% end %>
+<% element tag: :span do %>config.error = java.io.ByteArrayOutputStream.new<% end %>
+<% element tag: :span do %>status = org.jruby.Main.new(config).run(%w(arg1 arg2).to_java(:String)).status<% end %>
+<% element tag: :span do %>output = output_stream.to_string<% end %>
+      </p>
 
       <% notes do %>
       <% end %>
