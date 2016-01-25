@@ -602,77 +602,63 @@ end
     <% slide do %>
       <h3>Tools: Travis</h3>
 
-      <% element do %>
-        Configure via easy YAML file
-      <% end %>
+      <div id="travis-text">
+        <% element do %>
+          Configure via easy YAML file
+        <% end %>
 
-      <% element do %>
-        Build concurrently across multiple versions of ruby or environments
-      <% end %>
+        <% element do %>
+          Build concurrently across multiple versions of ruby or environments
+        <% end %>
 
-      <% notes do %>
-      <% end %>
-    <% end %>
+        <div id="travis-slack-text" style="display: none;">
+          Integrate seamlessly with Slack
+        </div>
 
-    <% slide do %>
-      <h3>Tools: Travis</h3>
+        <div id="travis-free-oss-text" style="display: none;">
+          Free for Open Source projects
+        </div>
+      </div>
 
-      <div>
+      <div id="travis-image-1" style="display: none;">
         <%= image "travis", width: "75%" %>
       </div>
 
-      <% notes do %>
-      <% end %>
-    <% end %>
-
-    <% slide do %>
-      <h3>Tools: Travis</h3>
-
-      <div>
-        Configure via easy YAML file
-      </div>
-
-      <div>
-        Build concurrently across multiple versions of ruby or environments
-      </div>
-
-      <div>
-        Integrate seamlessly with Slack
-      </div>
-
-      <% notes do %>
-      <% end %>
-    <% end %>
-
-    <% slide do %>
-      <h3>Tools: Travis</h3>
-
-      <div>
+      <div id="travis-image-2" style="display: none;">
         <%= image "slack-travis", width: "75%" %>
       </div>
 
-      <% notes do %>
-      <% end %>
-    <% end %>
+      <% element_js(up: -> { %>
+        $("#travis-text", document).hide();
+        $("#travis-image-1", document).show();
+      <% }, down: -> { %>
+        $("#travis-text", document).show();
+        $("#travis-image-1", document).hide();
+      <% }) %>
 
-    <% slide do %>
-      <h3>Tools: Travis</h3>
+      <% element_js(up: -> { %>
+        $("#travis-image-1", document).hide();
+        $("#travis-text, #travis-slack-text", document).show();
+      <% }, down: -> { %>
+        $("#travis-image-1", document).show();
+        $("#travis-text, #travis-slack-text", document).hide();
+      <% }) %>
 
-      <div>
-        Configure via easy YAML file
-      </div>
+      <% element_js(up: -> { %>
+        $("#travis-text", document).hide();
+        $("#travis-image-2", document).show();
+      <% }, down: -> { %>
+        $("#travis-text", document).show();
+        $("#travis-image-2", document).hide();
+      <% }) %>
 
-      <div>
-        Build concurrently across multiple versions of ruby or environments
-      </div>
-
-      <div>
-        Integrate seamlessly with Slack
-      </div>
-
-      <div>
-        Free for Open Source projects
-      </div>
+      <% element_js(up: -> { %>
+        $("#travis-image-2", document).hide();
+        $("#travis-text, #travis-free-oss-text", document).show();
+      <% }, down: -> { %>
+        $("#travis-image-2", document).show();
+        $("#travis-text, #travis-free-oss-text", document).hide();
+      <% }) %>
 
       <% notes do %>
       <% end %>
