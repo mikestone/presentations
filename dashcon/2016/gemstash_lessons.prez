@@ -6,7 +6,7 @@
 
   <body>
     <% slide do %>
-      <h1>Gemstash</h1>
+      <h2>Gemstash: A Tour + Lessons Learned</h2>
 
       <p>
         By MVS (Mike Virata-Stone)
@@ -17,41 +17,63 @@
       </p>
     <% end %>
 
+    <% slide do %>
+      <h2>Part 1: A Tour</h2>
+    <% end %>
+
     <% slide align: :left do %>
       <p>
         What exactly <em>is</em> Gemstash?
       </p>
 
       <ul>
-        <% element tag: "li" do %>It is a local gem server<% end %>
-        <% element tag: "li" do %>It caches gems from rubygems.org<% end %>
-        <% element tag: "li" do %>It caches gems from any other gem source<% end %>
-        <% element tag: "li" do %>It stores your own private gems<% end %>
+        <% element tag: :li do %>It is a local gem server<% end %>
+        <% element tag: :li do %>It caches gems from rubygems.org<% end %>
+        <% element tag: :li do %>It caches gems from any other gem source<% end %>
+        <% element tag: :li do %>It stores your own private gems<% end %>
       </ul>
 
       <% notes do %>
       <% end %>
     <% end %>
 
-    <% slide do %>
+    <% slide align: :left do %>
       <p>
-        Why?
+        Why use it?
       </p>
 
-      <% notes do %>
-      <% end %>
-    <% end %>
-
-    <% slide do %>
-      <p>
-        TODO: Number of gem statistics, bandwidth, downloads
-      </p>
+      <ul>
+        <% element tag: :li do %>There are 113,324 distinct gems on rubygems.org<% end %>
+        <% element tag: :li do %>With 626,317 versions<% end %>
+        <% element tag: :li do %>There have been over 7,200,000,000 downloads<% end %>
+        <% element tag: :li do %>Downloading all gem versions is about 120 GB<% end %>
+        <% element tag: :li do %>90 gems downloaded per second at the non-peak hour of 12:30am early Monday morning<% end %>
+      </ul>
 
       <% notes do %>
         <ul>
           <li>Public good, free service</li>
-          <li>Heavy bandwidth toll</li>
-          <li>~120 GB for all gems</li>
+          <li>Heavy <strong>bandwidth</strong>, <strong>storage</strong>, and <strong>hosting</strong> toll</li>
+          <li>Who <strong>pays</strong> for it all?</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide align: :left do %>
+      <p>
+        Why use it?
+      </p>
+
+      <ul>
+        <% element tag: :li do %>Rental Express has about 220 gems in our Gemfile<% end %>
+        <% element tag: :li do %>Those gems total about 44 MB<% end %>
+        <% element tag: :li do %>When bundling, each gem is fetched separately<% end %>
+      </ul>
+
+      <% notes do %>
+        <ul>
+          <li>Imagine bundling with a longer response time, like <strong>on the other side of the world</strong></li>
+          <li>Imagine bundling on a <strong>spotty</strong> or <strong>slow connection</strong></li>
         </ul>
       <% end %>
     <% end %>
@@ -95,9 +117,9 @@ Installing rails 4.2.5
 Bundle complete! 1 Gemfile dependency, 34 gems now installed.
 Use `bundle show [gemname]` to see where a bundled gem is installed.
 
-real	1m41.089s
-user	0m32.986s
-sys	0m23.096s
+real    1m41.089s
+user    0m32.986s
+sys     0m23.096s
       <% end %>
 
       <% notes do %>
@@ -107,8 +129,14 @@ sys	0m23.096s
       <% end %>
     <% end %>
 
-    <% slide do %>
-      <p class="pre">real	1m41.089s</p>
+    <% slide align: :left do %>
+      <p>
+        Bundling Rails 4.2.5 against https://rubygems.org
+      </p>
+
+      <p class="pre smaller">
+<strong>real    1m41.089s</strong>
+      </p>
 
       <% notes do %>
       <% end %>
@@ -132,9 +160,9 @@ Installing rails 4.2.5
 Bundle complete! 1 Gemfile dependency, 34 gems now installed.
 Use `bundle show [gemname]` to see where a bundled gem is installed.
 
-real	0m54.471s
-user	0m31.413s
-sys	0m22.742s
+real    0m54.471s
+user    0m31.413s
+sys     0m22.742s
       <% end %>
 
       <% notes do %>
@@ -144,29 +172,26 @@ sys	0m22.742s
       <% end %>
     <% end %>
 
-    <% slide do %>
-      <p class="pre">real	0m54.471s</p>
+    <% slide align: :left do %>
+      <p>
+        And now against Gemstash where all gems have been cached
+      </p>
+
+      <p class="pre smaller">
+<strong>real    0m54.471s</strong>
+      </p>
 
       <% notes do %>
       <% end %>
     <% end %>
 
-    <% slide do %>
+    <% slide align: :left do %>
       <p>
         Nokogiri takes a long time to build, so I tried again with Nokogiri preinstalled.
       </p>
 
-      <table style="border: none">
-        <% element tag: :tr do %>
-          <td>rubygems.org</td>
-          <td class="pre">real	0m32.879s</td>
-        <% end %>
-
-        <% element tag: :tr do %>
-          <td>Gemstash</td>
-          <td class="pre">real	0m11.160s</td>
-        <% end %>
-      </table>
+      <% element class: "pre" do %><strong>rubygems.org:</strong>   real    0m32.879s<% end %>
+      <% element class: "pre" do %><strong>Gemstash:</strong>       real    0m11.160s<% end %>
 
       <% notes do %>
       <% end %>
@@ -386,7 +411,12 @@ end
       </p>
 
       <% notes do %>
+        <p>Before we go into <strong>Part 2</strong>, any questions?</p>
       <% end %>
+    <% end %>
+
+    <% slide do %>
+      <h2>Part 2: Lessons Learned</h2>
     <% end %>
   </body>
 </html>
