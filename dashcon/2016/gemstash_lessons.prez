@@ -32,9 +32,7 @@
     <% end %>
 
     <% slide align: :left do %>
-      <p>
-        What exactly <em>is</em> Gemstash?
-      </p>
+      <h3>What exactly <em>is</em> Gemstash?</h3>
 
       <ul>
         <% element tag: :li do %>It is a local gem server<% end %>
@@ -48,9 +46,7 @@
     <% end %>
 
     <% slide align: :left do %>
-      <p>
-        Why use it?
-      </p>
+      <h3>Why use it?</h3>
 
       <ul>
         <% element tag: :li do %>There are <strong>113,324</strong> distinct gems on rubygems.org<% end %>
@@ -70,9 +66,7 @@
     <% end %>
 
     <% slide align: :left do %>
-      <p>
-        Why use it?
-      </p>
+      <h3>Why use it?</h3>
 
       <ul>
         <% element tag: :li do %>Rental Express has about <strong>220</strong> gems in our Gemfile<% end %>
@@ -101,9 +95,7 @@
     <% end %>
 
     <% slide do %>
-      <p>
-        That's nice, but what's in it for me?
-      </p>
+      <h3>That's nice, but what's in it for me?</h3>
 
       <% notes do %>
       <% end %>
@@ -208,9 +200,7 @@ sys     0m22.742s
     <% end %>
 
     <% slide do %>
-      <p>
-        Speed is nice, but what else?
-      </p>
+      <h3>Speed is nice, but what else?</h3>
 
       <% notes do %>
       <% end %>
@@ -247,9 +237,7 @@ sys     0m22.742s
     <% end %>
 
     <% slide do %>
-      <p>
-        But wait, there's more...
-      </p>
+      <h3>But wait, there's more...</h3>
 
       <% element do %>
         We have added <strong>1,889</strong> gem files in our master git history
@@ -274,9 +262,7 @@ sys     0m22.742s
     <% end %>
 
     <% slide do %>
-      <p>
-        So what?
-      </p>
+      <h3>So what?</h3>
 
       <% element do %>
         Our git repository is about <strong>1.5 GB</strong> (not including submodules)
@@ -302,18 +288,11 @@ sys     0m22.742s
     <% end %>
 
     <% slide do %>
-      <p>
-        How will this help with the jar situation?
-      </p>
+      <h3>How will this help with the jar situation?</h3>
 
-      <% notes do %>
-      <% end %>
-    <% end %>
-
-    <% slide do %>
-      <p>
+      <% element do %>
         The future of Gemstash:
-      </p>
+      <% end %>
 
       <% element do %>
         Plugins!
@@ -329,9 +308,7 @@ sys     0m22.742s
     <% end %>
 
     <% slide do %>
-      <p>
-        So how do you use Gemstash?
-      </p>
+      <h3>So how do you use Gemstash?</h3>
 
       <% notes do %>
       <% end %>
@@ -356,7 +333,7 @@ sys     0m22.742s
         Update your <strong>Gemfile</strong>:
       </p>
 
-      <p class="pre">
+      <% element tag: :p, class: "pre" do %>
 source "https://rubygems.org"
 
 gem "rails"
@@ -364,7 +341,7 @@ gem "rails"
 source "https://other-gem-server.org" do
   gem "other-gem"
 end
-      </p>
+      <% end %>
 
       <% notes do %>
       <% end %>
@@ -446,9 +423,7 @@ end
     <% end %>
 
     <% slide do %>
-      <p>
-        Questions?
-      </p>
+      <h3>Questions?</h3>
 
       <% notes do %>
         <p>Before we go into <strong>Part 2</strong>, any questions?</p>
