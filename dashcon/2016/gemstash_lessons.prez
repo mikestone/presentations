@@ -218,7 +218,11 @@ sys     0m22.742s
 
     <% slide do %>
       <p>
-        TODO: Show our version of multimap gem
+        In Rental Express:
+      </p>
+
+      <p>
+        <span class="pre">multimap</span> gem, version: <span class="pre">1.1.2</span>
       </p>
 
       <% notes do %>
@@ -227,8 +231,16 @@ sys     0m22.742s
 
     <% slide do %>
       <p>
-        TODO: Show available versions of multimap gem
+        <%= image "multimap-1", width: "50%", style: "position: absolute; z-index: 100; left: 25%; top: 10%;" %>
       </p>
+
+      <% element do %>
+        <%= image "multimap-2", width: "50%", style: "position: absolute; z-index: 900; left: 25%; top: 10%;" %>
+      <% end %>
+
+      <% element do %>
+        <%= image "multimap-3", width: "50%", style: "position: absolute; z-index: 900; left: 25%; top: 10%;" %>
+      <% end %>
 
       <% notes do %>
       <% end %>
