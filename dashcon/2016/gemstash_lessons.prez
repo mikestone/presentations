@@ -6,12 +6,311 @@
   <body>
     <% slide do %>
       <p>
-        Put each slide inside slide blocks.
+        What exactly <em>is</em> Gemstash?
+      </p>
+
+      <ul>
+        <% element tag: "li" do %>It is a local gem server<% end %>
+        <% element tag: "li" do %>It caches gems from rubygems.org<% end %>
+        <% element tag: "li" do %>It caches gems from any other gem source<% end %>
+        <% element tag: "li" do %>It stores your own private gems<% end %>
+      </ul>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        Why?
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        TODO: Number of gem statistics, bandwidth, downloads
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>Public good, free service</li>
+          <li>Heavy bandwidth toll</li>
+          <li>~120 GB for all gems</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        TODO: Bundling on every server of a service
       </p>
 
       <% notes do %>
         <p>
-          Nest your slide notes inside the slide.
+          Imagine if every company bundled against their own Gemstash server instead of using rubygems.org bandwidth
+        </p>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        That's nice, but what's in it for me?
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        Bundling Rails 4.2.5 against Gemstash where all gems have been cached
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        <pre>
+$ time bundle
+Fetching gem metadata from http://localhost:9292/...........
+Fetching version metadata from http://localhost:9292/...
+Fetching dependency metadata from http://localhost:9292/..
+Installing rake 10.5.0
+Installing i18n 0.7.0
+Using json 1.8.3
+Installing minitest 5.8.4
+Installing thread_safe 0.3.5
+Installing builder 3.2.2
+Installing erubis 2.7.0
+Installing mini_portile2 2.0.0
+Installing rack 1.6.4
+Installing mime-types 2.99
+Installing arel 6.0.3
+Installing concurrent-ruby 1.0.0
+Using bundler 1.11.2
+Installing thor 0.19.1
+Installing tzinfo 1.2.2
+Installing nokogiri 1.6.7.2 with native extensions
+Installing rack-test 0.6.3
+Installing mail 2.6.3
+Installing sprockets 3.5.2
+Installing activesupport 4.2.5
+Installing loofah 2.0.3
+Installing rails-deprecated_sanitizer 1.0.3
+Installing globalid 0.3.6
+Installing activemodel 4.2.5
+Installing rails-html-sanitizer 1.0.2
+Installing rails-dom-testing 1.0.7
+Installing activejob 4.2.5
+Installing activerecord 4.2.5
+Installing actionview 4.2.5
+Installing actionpack 4.2.5
+Installing actionmailer 4.2.5
+Installing railties 4.2.5
+Installing sprockets-rails 3.0.0
+Installing rails 4.2.5
+Bundle complete! 1 Gemfile dependency, 34 gems now installed.
+Use `bundle show [gemname]` to see where a bundled gem is installed.
+
+real	0m54.471s
+user	0m31.413s
+sys	0m22.742s
+        </pre>
+      </p>
+
+      <% notes do %>
+        <p>
+          Let's focus on the result of that
+        </p>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        <pre>real	0m54.471s</pre>
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        <pre>
+$ time bundle
+Fetching gem metadata from https://rubygems.org/...........
+Fetching version metadata from https://rubygems.org/...
+Fetching dependency metadata from https://rubygems.org/..
+Installing rake 10.5.0
+Installing i18n 0.7.0
+Using json 1.8.3
+Installing minitest 5.8.4
+Installing thread_safe 0.3.5
+Installing builder 3.2.2
+Installing erubis 2.7.0
+Installing mini_portile2 2.0.0
+Installing rack 1.6.4
+Installing mime-types 2.99
+Installing arel 6.0.3
+Installing concurrent-ruby 1.0.0
+Using bundler 1.11.2
+Installing thor 0.19.1
+Installing tzinfo 1.2.2
+Installing nokogiri 1.6.7.2 with native extensions
+Installing rack-test 0.6.3
+Installing mail 2.6.3
+Installing sprockets 3.5.2
+Installing activesupport 4.2.5
+Installing loofah 2.0.3
+Installing rails-deprecated_sanitizer 1.0.3
+Installing globalid 0.3.6
+Installing activemodel 4.2.5
+Installing rails-html-sanitizer 1.0.2
+Installing rails-dom-testing 1.0.7
+Installing activejob 4.2.5
+Installing activerecord 4.2.5
+Installing actionview 4.2.5
+Installing actionpack 4.2.5
+Installing actionmailer 4.2.5
+Installing railties 4.2.5
+Installing sprockets-rails 3.0.0
+Installing rails 4.2.5
+Bundle complete! 1 Gemfile dependency, 34 gems now installed.
+Use `bundle show [gemname]` to see where a bundled gem is installed.
+
+real	1m41.089s
+user	0m32.986s
+sys	0m23.096s
+        </pre>
+      </p>
+
+      <% notes do %>
+        <p>
+          Again, let's focus on the result of that
+        </p>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        <pre>real	1m41.089s</pre>
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        Nokogiri takes a long time, so I tried again with Nokogiri preinstalled. The result was:
+      </p>
+
+      <p>
+        Gemstash:
+        <pre>real	0m11.160s</pre>
+      </p>
+
+      <p>
+        rubygems.org:
+        <pre>real	0m32.879s</pre>
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        Speed is nice, but what else?
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        TODO: Show our version of multimap gem
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        TODO: Show available versions of multimap gem
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        But wait, there's more...
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        TODO: Show size of gems (image of person struggling to balance gems)
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        TODO: Show size of jars (image of person struggling harder to balance gems + jars)
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        TODO: Show size of .git objects directory
+      </p>
+
+      <% notes do %>
+        <p>
+          Talk about how we can remove gem files from our repo
+        </p>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        How will this help with the jar situation?
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        The future of Gemstash: plugins (TODO: maybe gemstash with carrot + jars?)
+      </p>
+
+      <% notes do %>
+        <p>
+          Talk about plans to hook in jar caching and maybe more
+        </p>
+
+        <p>
+          Maybe mention npm implementation
         </p>
       <% end %>
     <% end %>
