@@ -146,28 +146,21 @@ Installing rails 4.2.5
 Bundle complete! 1 Gemfile dependency, 34 gems now installed.
 Use `bundle show [gemname]` to see where a bundled gem is installed.
 
-real    1m41.089s
+<span id="rg-bundle-real">real    1m41.089s</span>
 user    0m32.986s
 sys     0m23.096s
       <% end %>
+
+      <% element_js(up: -> { %>
+        $("#rg-bundle-real", document).addClass("emphasize blue-background");
+      <% }, down: -> { %>
+        $("#rg-bundle-real", document).removeClass("emphasize blue-background");
+      <% }) %>
 
       <% notes do %>
         <p>
           Let's focus on the result of that
         </p>
-      <% end %>
-    <% end %>
-
-    <% slide align: :left do %>
-      <p>
-        Bundling Rails 4.2.5 against https://rubygems.org
-      </p>
-
-      <p class="pre smaller">
-<strong>real    1m41.089s</strong>
-      </p>
-
-      <% notes do %>
       <% end %>
     <% end %>
 
@@ -189,28 +182,21 @@ Installing rails 4.2.5
 Bundle complete! 1 Gemfile dependency, 34 gems now installed.
 Use `bundle show [gemname]` to see where a bundled gem is installed.
 
-real    0m54.471s
+<span id="gemstash-bundle-real">real    0m54.471s</span>
 user    0m31.413s
 sys     0m22.742s
       <% end %>
+
+      <% element_js(up: -> { %>
+        $("#gemstash-bundle-real", document).addClass("emphasize blue-background");
+      <% }, down: -> { %>
+        $("#gemstash-bundle-real", document).removeClass("emphasize blue-background");
+      <% }) %>
 
       <% notes do %>
         <p>
           Again, let's focus on the result of that
         </p>
-      <% end %>
-    <% end %>
-
-    <% slide align: :left do %>
-      <p>
-        And now against Gemstash where all gems have been cached
-      </p>
-
-      <p class="pre smaller">
-<strong>real    0m54.471s</strong>
-      </p>
-
-      <% notes do %>
       <% end %>
     <% end %>
 
@@ -365,75 +351,38 @@ sys     0m22.742s
       </p>
 
       <% element tag: :p, class: "pre" do %>
-source "https://rubygems.org"
+<span id="gemfile-require-cgi" style="display: none;">require "cgi"
+</span>source <span class="gemfile-original-source">"https://rubygems.org"</span><span class="gemfile-new-source">"http://localhost:9292"</span>
 
 gem "rails"
 
-source "https://other-gem-server.org" do
+source <span class="gemfile-original-source">"https://other-gem-server.org"</span><span class="gemfile-new-source">"http://localhost:9292/upstream/" +
+    CGI.escape("https://other-gem-server.org")</span> do
   gem "other-gem"
 end
       <% end %>
 
-      <% notes do %>
-      <% end %>
-    <% end %>
+      <% element_js(up: -> { %>
+        $("#gemfile-require-cgi", document).show().addClass("emphasize green-background");
+      <% }, down: -> { %>
+        $("#gemfile-require-cgi", document).hide().removeClass("emphasize green-background");
+      <% }) %>
 
-    <% slide align: :left do %>
-      <p>
-        Update your <strong>Gemfile</strong>:
-      </p>
+      <% element_js(up: -> { %>
+        $(".gemfile-original-source", document).addClass("strikeout red-background");
+        $("#gemfile-require-cgi", document).removeClass("emphasize green-background");
+      <% }, down: -> { %>
+        $(".gemfile-original-source", document).removeClass("strikeout red-background");
+        $("#gemfile-require-cgi", document).addClass("emphasize green-background");
+      <% }) %>
 
-      <p class="pre">
-<strong>require "cgi"</strong>
-source "https://rubygems.org"
-
-gem "rails"
-
-source "https://other-gem-server.org" do
-  gem "other-gem"
-end
-      </p>
-
-      <% notes do %>
-      <% end %>
-    <% end %>
-
-    <% slide align: :left do %>
-      <p>
-        Update your <strong>Gemfile</strong>:
-      </p>
-
-      <p class="pre">
-require "cgi"
-source <strike>"https://rubygems.org"</strike>
-
-gem "rails"
-
-source <strike>"https://other-gem-server.org"</strike> do
-  gem "other-gem"
-end
-      </p>
-
-      <% notes do %>
-      <% end %>
-    <% end %>
-
-    <% slide align: :left do %>
-      <p>
-        Update your <strong>Gemfile</strong>:
-      </p>
-
-      <p class="pre">
-require "cgi"
-source <strong>"http://localhost:9292"</strong>
-
-gem "rails"
-
-source <strong>"http://localhost:9292/upstream/" +
-    CGI.escape("https://other-gem-server.org")</strong> do
-  gem "other-gem"
-end
-      </p>
+      <% element_js(up: -> { %>
+        $(".gemfile-original-source", document).hide();
+        $(".gemfile-new-source", document).show().addClass("emphasize green-background");
+      <% }, down: -> { %>
+        $(".gemfile-original-source", document).show();
+        $(".gemfile-new-source", document).hide().removeClass("emphasize green-background");
+      <% }) %>
 
       <% notes do %>
       <% end %>
@@ -503,17 +452,17 @@ end
       <% end %>
     <% end %>
 
-    <% slide do %>
+    <% slide align: :left do %>
       <h3>Java trubs</h3>
 
       <% element do %>
         Integration specs shell out to act as Bundler calling Gemstash:
       <% end %>
 
-      <% element class: "pre" do %>
+      <% element class: "pre smaller" do %>
 it "can bundle with full index" do
-  expect(<strong>execute("bundle", %w(--full-index)</strong>, dir: dir)).to exit_success
-  expect(<strong>execute("bundle", %w(exec speaker hi)</strong>, dir: dir)).
+  expect(<strong class="blue-background">execute("bundle", %w(--full-index)</strong>, dir: dir)).to exit_success
+  expect(<strong class="blue-background">execute("bundle", %w(exec speaker hi)</strong>, dir: dir)).
     to exit_success.and_output("Hello world, #{platform_message}\n")
 end
       <% end %>
