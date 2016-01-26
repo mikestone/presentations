@@ -111,7 +111,19 @@
 
     <% slide do %>
       <p>
-        TODO: Bundling on every server of a service
+        <%= image "bundle-no-gemstash", width: "75%" %>
+      </p>
+
+      <% notes do %>
+        <p>
+          Imagine if every company bundled against their own Gemstash server instead of using rubygems.org bandwidth
+        </p>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        <%= image "bundle-with-gemstash", width: "75%" %>
       </p>
 
       <% notes do %>
@@ -254,23 +266,31 @@ sys     0m22.742s
 
       <% element do %>
         We have added <strong>1,889</strong> gem files in our master git history
+        <%= image "gem-load", id: "gem-load-image", width: "50%", style: "position: absolute; z-index: 100; right: 0px; bottom: 0px;" %>
       <% end %>
 
       <% element do %>
         (That's <strong>491,323,396</strong> bytes - <strong>491 MB</strong>)
       <% end %>
 
-      <% element do %>
+      <div id="jar-count" style="display: none;">
         We have added <strong>491</strong> jars in our master git history
-      <% end %>
+        <%= image "gem-jar-load", width: "50%", style: "position: absolute; z-index: 400; right: 0px; bottom: 0px;" %>
+      </div>
+
+      <% element_js(up: -> { %>
+        $("#gem-load-image", document).hide();
+        $("#jar-count", document).show();
+      <% }, down: -> { %>
+        $("#gem-load-image", document).show();
+        $("#jar-count", document).hide();
+      <% }) %>
 
       <% element do %>
         (That's <strong>423,109,726</strong> bytes - <strong>423 MB</strong>)
       <% end %>
 
       <% notes do %>
-        TODO: Show size of gems (image of person struggling to balance gems)<br />
-        TODO: Show size of jars (image of person struggling harder to balance gems + jars)
       <% end %>
     <% end %>
 
@@ -313,7 +333,6 @@ sys     0m22.742s
 
       <% notes do %>
         <ul>
-          <li>TODO: maybe gemstash with carrot + jars?</li>
           <li>Talk about plans to hook in jar caching and maybe more</li>
           <li>Maybe mention npm implementation</li>
         </ul>
@@ -352,11 +371,11 @@ sys     0m22.742s
 
       <% element tag: :p, class: "pre" do %>
 <span id="gemfile-require-cgi" style="display: none;">require "cgi"
-</span>source <span class="gemfile-original-source">"https://rubygems.org"</span><span class="gemfile-new-source">"http://localhost:9292"</span>
+</span>source <span class="gemfile-original-source">"https://rubygems.org"</span><span class="gemfile-new-source" style="display: none;">"http://localhost:9292"</span>
 
 gem "rails"
 
-source <span class="gemfile-original-source">"https://other-gem-server.org"</span><span class="gemfile-new-source">"http://localhost:9292/upstream/" +
+source <span class="gemfile-original-source">"https://other-gem-server.org"</span><span class="gemfile-new-source" style="display: none;">"http://localhost:9292/upstream/" +
     CGI.escape("https://other-gem-server.org")</span> do
   gem "other-gem"
 end
@@ -480,6 +499,7 @@ end
 
       <% element do %>
         On JRuby, the same tests were taking over <strong>4 min 30 sec</strong>!!
+        <%= image "jruby-slow", width: "50%" %>
       <% end %>
 
       <% notes do %>
