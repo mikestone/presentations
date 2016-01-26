@@ -258,6 +258,10 @@ sys     0m22.742s
       <% end %>
 
       <% notes do %>
+        <ul>
+          <li>With gems cached in repo, these yanked gems won't force us to update</li>
+          <li>Gemstash lets us do the same thing</li>
+        </ul>
       <% end %>
     <% end %>
 
@@ -418,6 +422,11 @@ end
       </p>
 
       <% notes do %>
+        <ul>
+          <li>You can start using gemstash now</li>
+          <li>No need to wait till we set up a company-wide server</li>
+          <li>I've been running it locally for a few weeks now</li>
+        </ul>
       <% end %>
     <% end %>
 
