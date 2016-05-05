@@ -13,6 +13,14 @@
         background-color: white;
         color: black;
       }
+
+      .inverted-text {
+        color: black;
+      }
+
+      .smallest, .smallest.pre {
+        font-size: 0.4em;
+      }
     </style>
   </head>
 
@@ -121,6 +129,122 @@
 
       <% element do %>
         Weighing in at over <strong>490 MB</strong>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <h3>Meh.</h3>
+
+      <% element do %>
+        <h3>Just download it every time.</h3>
+      <% end %>
+    <% end %>
+
+    <% slide align: :left do %>
+      <p class="smaller">
+        Bundling Rails 4.2.5 against https://rubygems.org
+      </p>
+
+      <% element class: "pre smallest" do %>
+$ time bundle
+Fetching gem metadata from https://rubygems.org/...........
+Fetching version metadata from https://rubygems.org/...
+Fetching dependency metadata from https://rubygems.org/..
+Installing rake 10.5.0
+Installing i18n 0.7.0
+...
+Installing sprockets-rails 3.0.0
+Installing rails 4.2.5
+Bundle complete! 1 Gemfile dependency, 34 gems now installed.
+Use `bundle show [gemname]` to see where a bundled gem is installed.
+
+<span id="rg-bundle-real">real    1m41.089s</span>
+user    0m32.986s
+sys     0m23.096s
+      <% end %>
+
+      <% element_js(up: -> { %>
+        $("#rg-bundle-real", document).addClass("emphasize blue-background inverted-text");
+      <% }, down: -> { %>
+        $("#rg-bundle-real", document).removeClass("emphasize blue-background inverted-text");
+      <% }) %>
+
+      <% notes do %>
+        <p>
+          Let's focus on the result of that
+        </p>
+      <% end %>
+    <% end %>
+
+    <% slide align: :left do %>
+      <p class="smaller">
+        And now against Gemstash where all gems have been cached
+      </p>
+
+      <% element class: "pre smallest" do %>
+$ time bundle
+Fetching gem metadata from http://localhost:9292/...........
+Fetching version metadata from http://localhost:9292/...
+Fetching dependency metadata from http://localhost:9292/..
+Installing rake 10.5.0
+Installing i18n 0.7.0
+...
+Installing sprockets-rails 3.0.0
+Installing rails 4.2.5
+Bundle complete! 1 Gemfile dependency, 34 gems now installed.
+Use `bundle show [gemname]` to see where a bundled gem is installed.
+
+<span id="gemstash-bundle-real">real    0m54.471s</span>
+user    0m31.413s
+sys     0m22.742s
+      <% end %>
+
+      <% element_js(up: -> { %>
+        $("#gemstash-bundle-real", document).addClass("emphasize blue-background inverted-text");
+      <% }, down: -> { %>
+        $("#gemstash-bundle-real", document).removeClass("emphasize blue-background inverted-text");
+      <% }) %>
+
+      <% notes do %>
+        <p>
+          Again, let's focus on the result of that
+        </p>
+      <% end %>
+    <% end %>
+
+    <% slide align: :left do %>
+      <p>
+        Nokogiri takes a long time to build, so I tried again with Nokogiri preinstalled.
+      </p>
+
+      <% element class: "pre" do %><strong>rubygems.org:</strong>   real    0m32.879s<% end %>
+      <% element class: "pre" do %><strong>Gemstash:</strong>       real    0m11.160s<% end %>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        <%= image "bundle-no-gemstash", width: "75%" %>
+      </p>
+
+      <% notes do %>
+        <p>
+          Imagine if every company bundled against their own Gemstash server instead of using rubygems.org bandwidth
+        </p>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <p>
+        <%= image "bundle-with-gemstash", width: "75%" %>
+      </p>
+
+      <% notes do %>
+        <p>
+          Imagine if every company bundled against their own Gemstash server instead of using rubygems.org bandwidth
+        </p>
       <% end %>
     <% end %>
 
