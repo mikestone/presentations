@@ -95,11 +95,9 @@
       <% end %>
 
       <% notes do %>
-        <ul>
-          <li>Public good, free service</li>
-          <li>Heavy <strong>bandwidth</strong>, <strong>storage</strong>, and <strong>hosting</strong> toll</li>
-          <li>Who <strong>pays</strong> for it all?</li>
+        <ul class="smaller">
           <li>CONTRIBUTE TO RUBY TOGETHER!</li>
+          <li>Public good, free service, Heavy <strong>bandwidth</strong>, <strong>storage</strong>, and <strong>hosting</strong> toll, Who <strong>pays</strong> for it all?</li>
         </ul>
       <% end %>
     <% end %>
