@@ -99,6 +99,7 @@
           <li>Public good, free service</li>
           <li>Heavy <strong>bandwidth</strong>, <strong>storage</strong>, and <strong>hosting</strong> toll</li>
           <li>Who <strong>pays</strong> for it all?</li>
+          <li>CONTRIBUTE TO RUBY TOGETHER!</li>
         </ul>
       <% end %>
     <% end %>
@@ -351,6 +352,7 @@ end
       <% notes do %>
         <ul>
           <li>I've been running it locally for a few months now</li>
+          <li>UPDATE BUNDLER!!</li>
         </ul>
       <% end %>
     <% end %>
@@ -401,7 +403,8 @@ end
       <% notes do %>
         <ul>
           <li>Special thanks to these people for helping make it real</li>
-          <li>And all else who have tried and contributed to Gemstash!</li>
+          <li>And all else who have contributed to Gemstash or tried it out!</li>
+          <li>Maybe stickers after lunch tomorrow</li>
         </ul>
       <% end %>
     <% end %>
