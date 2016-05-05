@@ -224,6 +224,27 @@ sys     0m22.742s
       <% end %>
     <% end %>
 
+    <% slide class: "inverted" do %>
+      <p>
+        <%= image "multimap-1", width: "50%", style: "position: absolute; z-index: 100; left: 25%; top: 10%;" %>
+      </p>
+
+      <% element do %>
+        <%= image "multimap-2", width: "50%", style: "position: absolute; z-index: 200; left: 25%; top: 10%;" %>
+      <% end %>
+
+      <% element do %>
+        <%= image "multimap-3", width: "50%", style: "position: absolute; z-index: 400; left: 25%; top: 10%;" %>
+      <% end %>
+
+      <% notes do %>
+        <ul>
+          <li>With gems cached in repo, these yanked gems won't force us to update</li>
+          <li>Gemstash lets us do the same thing</li>
+        </ul>
+      <% end %>
+    <% end %>
+
     <% slide do %>
       <p>
         <%= image "bundle-no-gemstash", width: "75%" %>
@@ -245,6 +266,91 @@ sys     0m22.742s
         <p>
           Imagine if every company bundled against their own Gemstash server instead of using rubygems.org bandwidth
         </p>
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <h3>So how do you use Gemstash?</h3>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide align: :left do %>
+      <p>
+        Set it up, and start it
+      </p>
+
+      <p class="pre">
+<% element tag: :span do %>$ gem install gemstash<% end %>
+<% element tag: :span do %>$ gemstash start<% end %>
+      </p>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide align: :left do %>
+      <p>
+        Update your <strong>Gemfile</strong>:
+      </p>
+
+      <% element tag: :p, class: "pre smaller" do %>
+<span id="gemfile-require-cgi" style="display: none;">require "cgi"
+</span>source <span class="gemfile-original-source">"https://rubygems.org"</span><span class="gemfile-new-source" style="display: none;">"http://localhost:9292"</span>
+
+gem "rails"
+
+source <span class="gemfile-original-source">"https://other-gem-server.org"</span><span class="gemfile-new-source" style="display: none;">"http://localhost:9292/upstream/" +
+    CGI.escape("https://other-gem-server.org")</span> do
+  gem "other-gem"
+end
+      <% end %>
+
+      <% element_js(up: -> { %>
+        $("#gemfile-require-cgi", document).show().addClass("emphasize green-background inverted-text");
+      <% }, down: -> { %>
+        $("#gemfile-require-cgi", document).hide().removeClass("emphasize green-background inverted-text");
+      <% }) %>
+
+      <% element_js(up: -> { %>
+        $(".gemfile-original-source", document).addClass("strikeout red-background inverted-text");
+        $("#gemfile-require-cgi", document).removeClass("emphasize green-background inverted-text");
+      <% }, down: -> { %>
+        $(".gemfile-original-source", document).removeClass("strikeout red-background inverted-text");
+        $("#gemfile-require-cgi", document).addClass("emphasize green-background inverted-text");
+      <% }) %>
+
+      <% element_js(up: -> { %>
+        $(".gemfile-original-source", document).hide();
+        $(".gemfile-new-source", document).show().addClass("emphasize green-background inverted-text");
+      <% }, down: -> { %>
+        $(".gemfile-original-source", document).show();
+        $(".gemfile-new-source", document).hide().removeClass("emphasize green-background inverted-text");
+      <% }) %>
+
+      <% notes do %>
+      <% end %>
+    <% end %>
+
+    <% slide align: :left do %>
+      <p>
+        Even better, keep your <strong>Gemfile</strong> as is
+      </p>
+
+      <% element do %>
+        and use <strong>Bundler >= 1.11.2</strong>:
+      <% end %>
+
+      <p class="pre smallest">
+<% element tag: :span do %>$ bundle config mirror.https://rubygems.org http://localhost:9292<% end %>
+<% element tag: :span do %>$ bundle config mirror.https://other-gem-server.com http://localhost:9292<% end %>
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>I've been running it locally for a few months now</li>
+        </ul>
       <% end %>
     <% end %>
 
