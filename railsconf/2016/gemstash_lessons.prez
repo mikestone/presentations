@@ -368,5 +368,24 @@ end
         </ul>
       <% end %>
     <% end %>
+
+    <% slide class: "inverted" do %>
+      <h3>Special Thanks!</h3>
+
+      <p>
+        <%= image "creditz-2" %>
+      </p>
+
+      <p class="smaller">
+        @smellsblue on Twitter and GitHub
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>Special thanks to these people for helping make it real</li>
+          <li>And all else who have tried and contributed to Gemstash!</li>
+        </ul>
+      <% end %>
+    <% end %>
   </body>
 </html>
