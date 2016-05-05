@@ -30,21 +30,13 @@
         <%= image "gemstash" %>
       </p>
 
-      <h2>A Tour + Lessons Learned</h2>
-
       <p>
-        By MVS (Mike Virata-Stone)
+        by Mike Virata-Stone
       </p>
 
       <p class="smaller">
-        @smellsblue on Twitter and GitHub
+        <strong>@smellsblue</strong> on Twitter and GitHub
       </p>
-
-      <% notes do %>
-        <ul>
-          <li>Special thanks to <strong>Jon</strong> for the awesome Gemstash logo!</li>
-        </ul>
-      <% end %>
     <% end %>
 
     <% slide do %>
@@ -68,6 +60,15 @@
 
       <% notes do %>
       <% end %>
+    <% end %>
+
+    <% slide do %>
+      <h3>What exactly <em>is</em> Gemstash?</h3>
+      <%= image "bundler", width: "20%" %>
+
+      <p>
+        https://github.com/bundler/gemstash
+      </p>
     <% end %>
 
     <% slide do %>
@@ -352,6 +353,23 @@ end
           <li>I've been running it locally for a few months now</li>
         </ul>
       <% end %>
+    <% end %>
+
+    <% slide do %>
+      <h3>New index format!!</h3>
+
+      <p class="smaller">
+        http://andre.arko.net/2014/03/28/the-new-rubygems-index-format/
+      </p>
+
+      <% element class: "smaller" do %>
+        Coming soon<span style="font-size: 0.6em;">(ish)</span> to a Gemstash near you
+      <% end %>
+    <% end %>
+
+    <% slide do %>
+      <h3>Be a guide!</h3>
+      <%= image "guides", width: "35%" %>
     <% end %>
 
     <% slide class: "inverted" do %>
