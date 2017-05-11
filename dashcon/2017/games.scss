@@ -1,0 +1,13 @@
+.prez-slide.black {
+    background-color: black;
+    color: white;
+}
+
+.prez-slide.padding-fix {
+    height: 100%;
+    padding: 0px;
+
+    *:first-child {
+        padding-top: 107px;
+    }
+}

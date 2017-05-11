@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <% duration "30:00" %>
+    <%= stylesheet "prez" %>
+    <%= stylesheet "games" %>
+  </head>
+
+  <body>
+    <% slide class: "black padding-fix" do %>
+      <br />
+      <br />
+      <br />
+      <h1>5</h1>
+    <% end %>
+
+    <% slide class: "padding-fix" do %>
+      <br />
+      <br />
+      <br />
+      <h1>5</h1>
+    <% end %>
+
+    <% slide class: "black padding-fix" do %>
+      <br />
+      <br />
+      <br />
+      <h1>5.1</h1>
+    <% end %>
+
+    <% slide class: "padding-fix" do %>
+      <br />
+      <br />
+      <br />
+      <h1>5.1</h1>
+    <% end %>
+
+    <% slide do %>
+      <br />
+      <br />
+      <%= image "quiplash", width: "40%", style: "position: relative; top: 40px;" %>
+      <%= image "fibbage", width: "40%" %>
+    <% end %>
+
+    <% slide do %>
+      <br />
+      <br />
+      <%= image "codelash", width: "40%", style: "position: relative; top: 40px;" %>
+      <%= image "fibonacci", width: "40%" %>
+    <% end %>
+
+    <% slide do %>
+      <br />
+      <%= image "codelash", width: "80%" %>
+    <% end %>
+
+    <% slide do %>
+      <br />
+      <br />
+      <%= image "fibonacci", width: "80%" %>
+    <% end %>
+
+    <% slide do %>
+      <%= image "bugs", height: "80%" %>
+    <% end %>
+  </body>
+</html>
