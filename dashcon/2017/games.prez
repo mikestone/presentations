@@ -77,5 +77,10 @@
       <br />
       <%= image "dont_leave", width: "40%" %>
     <% end %>
+
+    <% slide do %>
+      <br />
+      <a href="http://codegames.virata-stone.com:3000/">http://codegames.virata-stone.com:3000/</a>
+    <% end %>
   </body>
 </html>
