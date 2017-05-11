@@ -10,7 +10,7 @@
       <br />
       <br />
       <br />
-      <h1>5</h1>
+      <% element tag: "h1" do %>5<% end %>
     <% end %>
 
     <% slide class: "padding-fix" do %>
@@ -61,6 +61,21 @@
 
     <% slide do %>
       <%= image "bugs", height: "80%" %>
+    <% end %>
+
+    <% slide do %>
+      <br />
+      <%= image "refresh", width: "30%" %>
+    <% end %>
+
+    <% slide do %>
+      <br />
+      <%= image "be_respectful", width: "50%" %>
+    <% end %>
+
+    <% slide do %>
+      <br />
+      <%= image "dont_leave", width: "40%" %>
     <% end %>
   </body>
 </html>
