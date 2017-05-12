@@ -1,0 +1,372 @@
+<html>
+  <head>
+    <% duration "5:00" %>
+    <%= stylesheet "prez" %>
+  </head>
+
+  <body>
+    <% slide class: "inverse left-aligned" do %>
+      <h2>{ hash: "house" }</h2>
+
+      <p>
+        Mike Virata-Stone
+      </p>
+
+      <p>
+        @smellsblue
+      </p>
+    <% end %>
+
+    <% slide class: "left-aligned" do %>
+      <p class="pre">
+{}
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>Let's talk about my favorite data structure, the Hash</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "inverse left-aligned" do %>
+      <p class="pre">
+{}
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>Specifically, let's see how it ticks</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "left-aligned" do %>
+      <p class="pre">
+[]
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>A hash is really just an array</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "inverse left-aligned" do %>
+      <p class="pre">
+[nil, nil, nil, nil, nil, nil,
+      nil, nil]
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>But we need an array of a fixed size, not too big, but not too small</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "left-aligned" do %>
+      <p class="pre">
+hash[a] = 1
+----&gt;
+a.hash ----&gt; 363236
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>And any time we want to store something there, we calculate a unique-ISH value (called a hash code) for that object</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "inverse left-aligned" do %>
+      <p class="pre">
+363236 % 8
+----&gt; 4
+[nil, nil, nil, nil, (a,1),
+      nil, nil, nil]
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>We modulo the hash code by the size of the array to figure out where to put the key and value</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "left-aligned" do %>
+      <p class="pre">
+b.hash
+103427492
+----&gt; 4
+[nil, nil, nil, nil, (a,1),
+      nil, nil, nil]
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>Sometimes a hash code modulo the array size will match that of another key... we call that a collision</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "inverse left-aligned" do %>
+      <p class="pre">
+[nil, nil, nil, nil,
+      [ (b, 2), (a,1) ],
+      nil, nil, nil]
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>When a collision happens, we store all the values in the same place using another array or a linked list</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "left-aligned" do %>
+      <p class="pre">
+[nil, (c, 3), nil, nil,
+      [ (b, 2), (a,1) ],
+      nil, nil, (d, 4)]
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>These key values will start filling in the gaps</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "inverse left-aligned" do %>
+      <p class="pre">
+[nil, (c, 3), nil, nil,
+      [ (b, 2), (a,1) ],
+      nil, nil, (d, 4)]
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>But not in any real order</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "left-aligned" do %>
+      <p class="pre">
+[nil, (c, 3), nil, nil,
+      [ (b, 2), (a,1) ],
+      nil, nil, (d, 4)]
+hash[a] == 1
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>To obtain a value that had a collision, we reuse the hash code to get to our list, then look through the list until we find a match for the key by testing if they are equal</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "inverse left-aligned" do %>
+      <p class="pre">
+a == b
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>Now let's say we have a custom object that has it's own meaning for equality</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "left-aligned" do %>
+      <p class="pre">
+a == b
+a.hash != b.hash
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>But since we didn't override the hash code, two objects that are equal will normally have different hash codes</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "inverse left-aligned" do %>
+      <p class="pre">
+a.hash % 8 != b.hash % 8
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>And that means taking the hash and modulo the array size often yields a different index, and so we can't find the value associated with that key</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "left-aligned" do %>
+      <p class="pre">
+a.hash == b.hash
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>Or alternatively, we intend two objects to be equal, but only override the hash code and not equals</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "inverse left-aligned" do %>
+      <p class="pre">
+a.hash == b.hash
+a.hash % 8 == b.hash % 8
+a != b
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>So we find the right place in the array, but we aren't sure that any of the key value's are meant for us, so we can't find the value associated with that key</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "left-aligned" do %>
+      <p class="pre">
+a == b
+a.hash == b.hash
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>This means that if we change equals, we probably want to change the hash code, and vice versa, at least if the object will be a key in a hash</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "inverse left-aligned" do %>
+      <p class="pre">
+[nil, nil, nil, nil, nil, nil,
+      nil, nil]
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>Now remember I said the array is a fixed size?</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "left-aligned" do %>
+      <p class="pre">
+[nil, [ (a,1), (d,4), (c,3) ],
+      nil, nil, [ (b,2), (e,5) ],
+      nil, nil, (f,6)]
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>Well, if we cram too many key and values in there, we end up with a lot of collisions</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "inverse left-aligned" do %>
+      <p class="pre">
+[nil, [ (a,1), (d,4), (c,3) ],
+      nil, nil, [ (b,2), (e,5) ],
+      nil, nil, (f,6)]
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>And a lot of collisions means we wade through those collisions a lot, making the hash slow</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "left-aligned" do %>
+      <p class="pre">
+[nil, nil, nil, nil, nil, nil,
+      nil, nil, nil, nil, nil,
+      nil, nil, nil, nil, nil]
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>So we can rebalance the hash, meaning we make a larger array</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "inverse left-aligned" do %>
+      <p class="pre">
+[nil, (e,5), nil, (f,6),
+      nil, nil, (a,1), (d,4),
+      nil, nil, (c,3),
+      nil, nil, (b,2), nil, nil]
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>And then all those hashes get moduloed with the new size, and so objects that collided before probably won't anymore</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "left-aligned" do %>
+      <p class="pre">
+[nil, [ (a,1), (d,4), (c,3) ],
+      nil, nil, [ (b,2), (e,5) ],
+      nil, nil, (f,6)]
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>A lot of collisions makes things slow</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "inverse left-aligned" do %>
+      <p class="pre">
+[nil, [ (a,1), (d,4), (c,3),
+        (b,2), (e,5), (f,6) ],
+      nil, nil, nil, nil, nil, nil]
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>Another thing that can make a lot of collisions is if our hash code is very bad, like always returning the same value, no matter what</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "left-aligned" do %>
+      <p class="pre">
+[nil, [ (a,1), (d,4), (c,3),
+        (b,2), (e,5), (f,6) ],
+      nil, nil, nil, nil, nil, nil]
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>So if you customize the hash code, use existing functions to generate the hash code, otherwise you might accidentally have a slow hash</li>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <% slide class: "inverse left-aligned" do %>
+      <p class="pre">
+/\
+{}
+      </p>
+
+      <% notes do %>
+        <ul>
+          <li>Welcome to the hash house</li>
+        </ul>
+      <% end %>
+    <% end %>
+  </body>
+</html>

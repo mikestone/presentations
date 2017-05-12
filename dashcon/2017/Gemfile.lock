@@ -12,7 +12,7 @@ GEM
     launchy (2.4.3)
       addressable (~> 2.3)
     libv8 (3.16.14.19)
-    prez (0.1.1)
+    prez (0.1.2)
       coffee-script (~> 2.3)
       launchy (~> 2.4)
       sass (~> 3.4)
@@ -37,4 +37,4 @@ DEPENDENCIES
   prez (~> 0.1.1)
 
 BUNDLED WITH
-   1.11.2
+   1.13.6
